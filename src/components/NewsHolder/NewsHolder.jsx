@@ -1,9 +1,11 @@
 import React from 'react';
+import './NewsHolder.css'
 
-function NewsHolder(){
+function NewsHolder(props){
+    console.log(props.newsUS)
     return(
         <div className='NewsHolder'>
-            <h1>News Holder</h1>
+            <h1>{props.newsUS}</h1>
         </div>
     )
 }

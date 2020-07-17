@@ -6,12 +6,19 @@ import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar'
 import HomePage from '../HomePage/HomePage'
+import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
+import {  getNews } from '../../services/news-api';
+
 
 
 class App extends Component {
   /*--- State ---*/
   state = {
-    user: userService.getUser()
+    user: userService.getUser(),
+    covidUSData: [],
+    covidWorldData: [],
+    USHistoric: [],
+    newsUS: []
   }
   /*--- Handle Methods ---*/
   handleLogout = () => {
@@ -23,23 +30,32 @@ class App extends Component {
     this.setState({user: userService.getUser()});
   }
   /*--- Lifecycle Methods ---*/
-  
+  async componentDidMount() {
+    const covidWorldData = await getTodayWorld();
+    const covidUSData = await getCurrentState();
+    const USHistoric = await getUnitedStatesHistorical()
+    const newsUS = await getNews()
+    this.setState({covidWorldData: covidWorldData, covidUSData: covidUSData, USHistoric: USHistoric, newsUS: newsUS})
+  }
+
+  /*--- Render Method ---*/
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          Covid Resources
-          <nav>
-            <>
-              <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
-            </>
-          </nav>
-        </header>
+        <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
         <main>
           <Switch>
             <Route exact path='/' render={() =>
-            <HomePage />
+            <HomePage
+              covidWorldData={this.state.covidWorldData}
+              covidUSData={this.state.covidUSData}
+              USHistoric={this.state.USHistoric}
+              newsUS={this.state.new}
+            />
             }/>
+            {/* <DataHolder
+            covidData={props.covidData}
+          /> */}
             <Route exact path='/signup' render={({ history }) => 
               <SignupPage
                 history={history}
@@ -54,8 +70,10 @@ class App extends Component {
             }/>
           </Switch>
         </main>
-        <footer className='header-footer'>
-          M A D E &nbsp;&nbsp;|&nbsp;&nbsp; B Y &nbsp;&nbsp;|&nbsp;&nbsp; A A R O N &nbsp;&nbsp;|&nbsp;&nbsp;S M I T H &nbsp;&nbsp;|&nbsp;&nbsp; github
+        <footer className='footer mt-auto py-3'>
+          <div className="container">
+            <span className="text-muted">M A D E &nbsp;&nbsp;|&nbsp;&nbsp; B Y &nbsp;&nbsp;|&nbsp;&nbsp; A A R O N &nbsp;&nbsp;|&nbsp;&nbsp;S M I T H &nbsp;&nbsp;|&nbsp;&nbsp; github</span>
+          </div>
         </footer>
       </div>
     );
