@@ -1,6 +1,7 @@
 .HomePage{
     display: flex;
     width: 100%;
+    height: 100%;
     justify-content: space-evenly
 }
 #sidebar-wrapper{
@@ -11,8 +12,13 @@
 .statsContainer{
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
+}
+.stuffContainer{
+    width: 70%;
 }
 .mainContainer{
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     width: 90%;

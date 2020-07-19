@@ -16,6 +16,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 
   /*--- Spot for api routes ---*/
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/news', require('./routes/api/news'));
+app.use('/api/forums', require('./routes/api/forums'));
+
 
   /*--- Spot for catch all route ---*/
 app.get('/*', function(req, res) {

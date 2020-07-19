@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 /*
 {
   updated: 1591782903866,
@@ -28,7 +29,6 @@
 let todayUrl = 'https://disease.sh/v3/covid-19/all'
 
 export function getTodayWorld() {
-    console.log("here", todayUrl)
     return (
         fetch(todayUrl, {mode: 'cors'})
         .then(res => res.json())
@@ -53,7 +53,6 @@ returns array  JSON
 let USHistoricalUrl = 'https://disease.sh/v3/covid-19/nyt/usa'
 
 export function getUnitedStatesHistorical() {
-    console.log("here", USHistoricalUrl)
     return (
         fetch(USHistoricalUrl, {mode: 'cors'})
         .then(res => res.json())
@@ -84,7 +83,6 @@ return array of JSON
 let allCountriesURL = 'https://disease.sh/v3/covid-19/jhucsse'
 
 export function getAllCountries() {
-    console.log("here", allCountriesURL)
     return (
         fetch(allCountriesURL, {mode: 'cors'})
         .then(res => res.json())
@@ -113,7 +111,6 @@ return array of JSON
 let statesHistoryURL = 'https://disease.sh/v3/covid-19/nyt/states'
 
 export function getStatesHistory() {
-    console.log("here", statesHistoryURL)
     return (
         fetch(statesHistoryURL, {mode: 'cors'})
         .then(res => res.json())

@@ -14,7 +14,7 @@ const HomePage = (props) => {
         <Aside className="aside" />
         <div className="mainContainer">
           <div className="statsContainer">
-            <div>
+            <div className="stuffContainer">
               <h2>Dashboard</h2>
               <div className='chartData'>
                 { props.USHistoric && <ChartPart 
@@ -25,7 +25,7 @@ const HomePage = (props) => {
                 /> } 
               </div>
               <NewsHolder
-                newsUS={props.newUS}
+                newsUS={props.newsUS}
               />
             </div>
             { props.covidWorldData && <TodaySnap

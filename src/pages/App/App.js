@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import userService from '../../utils/userService';
+import * as newsService from '../../utils/newsService'
+import NavBar from '../../components/NavBar/NavBar'
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import userService from '../../utils/userService';
-import NavBar from '../../components/NavBar/NavBar'
 import HomePage from '../HomePage/HomePage'
+import ForumPage from '../ForumPage/ForumPage'
+
 import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
-import {  getNews } from '../../services/news-api';
 
 
 
@@ -30,12 +32,14 @@ class App extends Component {
     this.setState({user: userService.getUser()});
   }
   /*--- Lifecycle Methods ---*/
+
   async componentDidMount() {
     const covidWorldData = await getTodayWorld();
     const covidUSData = await getCurrentState();
     const USHistoric = await getUnitedStatesHistorical()
-    const newsUS = await getNews()
-    this.setState({covidWorldData: covidWorldData, covidUSData: covidUSData, USHistoric: USHistoric, newsUS: newsUS})
+    const newsUS = await newsService.getAll();
+    console.log(newsUS)
+    this.setState({covidWorldData, covidUSData, USHistoric, newsUS: newsUS.articles})
   }
 
   /*--- Render Method ---*/
@@ -50,7 +54,7 @@ class App extends Component {
               covidWorldData={this.state.covidWorldData}
               covidUSData={this.state.covidUSData}
               USHistoric={this.state.USHistoric}
-              newsUS={this.state.new}
+              newsUS={this.state.newsUS}
             />
             }/>
             {/* <DataHolder
@@ -66,6 +70,11 @@ class App extends Component {
               <LoginPage
                 history={history}
                 handleLogin={this.handleSignupOrLogin}
+              />
+            }/>
+            <Route exact path='/forums' render={({ history }) => 
+              <ForumPage
+
               />
             }/>
           </Switch>

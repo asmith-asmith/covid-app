@@ -32,8 +32,7 @@ function ChartPart(props){
             ]
         };  
         return (
-            <div>
-                <h4>Dashboard</h4>
+            <div className="chart">
                 <Line data={data} />
             </div>
         );
