@@ -4,7 +4,7 @@ import './Aside.css'
 
 function Aside(){
     return(
-        <div className="" id="sidebar-wrapper"> // change the id
+        <div className="bg-light border-right" id="sidebar-wrapper">
             <div className="list-group list-group-flush">
                 <Link to='/' className="list-group-item list-group-item-action bg-light">Dashboard</Link>
                 <Link to='/forums' className="list-group-item list-group-item-action bg-light">Forums</Link>

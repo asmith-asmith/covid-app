@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as forumService from '../../utils/forumService'
-import Aside from '../../components/Aside/Aside'
 import ForumCard from '../../components/ForumCard/ForumCard'
 import './ForumPage.css'
 
@@ -8,7 +7,19 @@ import './ForumPage.css'
 class ForumPage extends Component {
     /*--- State ---*/
     state = {
-        forums: []
+        forums: [
+            {
+                _id: 1,
+                title: "the end is near",
+                user: 'Aaron',
+                comments: [
+                    {
+                        content: "loser",
+                        user: "meeeee"
+                    }
+                ],
+            }
+        ]
     }
     /*--- Handle Methods ---*/
     
@@ -25,11 +36,9 @@ class ForumPage extends Component {
     render() {
       return (
         <div className="Forum">
-            <Aside className="aside" />
             <div>
                 <h3>ALL FORUMS</h3>
-                <div>
-                    <ForumCard/>
+                <div className="collection">
                     {this.state.forums.map(forum =>
                         <ForumCard
                             key={forum._id}

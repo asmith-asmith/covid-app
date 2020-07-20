@@ -10,6 +10,7 @@ import HomePage from '../HomePage/HomePage'
 import ForumPage from '../ForumPage/ForumPage'
 
 import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
+import Aside from '../../components/Aside/Aside';
 
 
 
@@ -47,19 +48,19 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
-        <main>
+        <main className='site'>
           <Switch>
             <Route exact path='/' render={() =>
-            <HomePage
-              covidWorldData={this.state.covidWorldData}
-              covidUSData={this.state.covidUSData}
-              USHistoric={this.state.USHistoric}
-              newsUS={this.state.newsUS}
-            />
+              <>
+                <Aside/>
+                <HomePage
+                  covidWorldData={this.state.covidWorldData}
+                  covidUSData={this.state.covidUSData}
+                  USHistoric={this.state.USHistoric}
+                  newsUS={this.state.newsUS}
+                />
+              </>
             }/>
-            {/* <DataHolder
-            covidData={props.covidData}
-          /> */}
             <Route exact path='/signup' render={({ history }) => 
               <SignupPage
                 history={history}
@@ -73,18 +74,31 @@ class App extends Component {
               />
             }/>
             <Route exact path='/forums' render={({ history }) => 
-              <ForumPage
+              <>
+                <Aside/>
+                <ForumPage
 
-              />
+                />
+              </>
             }/>
           </Switch>
+          {/* <Route exact path='/builtby' render={({ history }) => 
+              <>
+                <Aside/>
+                <ForumPage
+                    
+                />
+              </>
+            }/>
+          </Switch> */}
         </main>
-        <footer className='footer mt-auto py-3'>
-          <div className="container">
-            <span className="text-muted">M A D E &nbsp;&nbsp;|&nbsp;&nbsp; B Y &nbsp;&nbsp;|&nbsp;&nbsp; A A R O N &nbsp;&nbsp;|&nbsp;&nbsp;S M I T H &nbsp;&nbsp;|&nbsp;&nbsp; github</span>
-          </div>
-        </footer>
+        {/* // <footer className='footer mt-auto py-3'>
+        //   <div className="container">
+        //     <span className="text-muted">M A D E &nbsp;&nbsp;|&nbsp;&nbsp; B Y &nbsp;&nbsp;|&nbsp;&nbsp; A A R O N &nbsp;&nbsp;|&nbsp;&nbsp;S M I T H &nbsp;&nbsp;|&nbsp;&nbsp; github</span>
+        //   </div>
+        // </footer> */}
       </div>
+    
     );
   }
 }

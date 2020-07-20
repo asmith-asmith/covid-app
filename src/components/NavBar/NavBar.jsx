@@ -4,7 +4,7 @@ import './NavBar.css';
 
 const NavBar = (props) => {
   let nav = props.user ?
-    <header className="App-header">
+    <header className="nav-header">
       <Link to='' className="navbar-brand">Covid Resources</Link>
       <nav>
         <Link to='' onClick={props.handleLogout}>LOG OUT</Link>
@@ -13,7 +13,7 @@ const NavBar = (props) => {
       </nav>
     </header>
     :
-    <header className="App-header">
+    <header className="nav-header">
       <Link to='' className="navbar-brand">Covid Resources</Link>
       <nav>
           <Link to='/login' className='navbar-text'>LOG IN</Link>

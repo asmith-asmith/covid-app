@@ -10,7 +10,7 @@ function TodaySnap(props){
                 <div className="panel-body">
                     <h5>Total Worldwide Cases: </h5>
                     <h3>{props.covidWorldData.cases}</h3>
-                    <h5>Total Worldwide Deaths: </h5>
+                    <h5>Total Worldwide Deceased: </h5>
                     <h3>{props.covidWorldData.deaths}</h3>
                     <h5>Todays Worldwide Cases: </h5>
                     <h3>{props.covidWorldData.todayCases}</h3>

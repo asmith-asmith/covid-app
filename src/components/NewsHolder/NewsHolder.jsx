@@ -1,12 +1,26 @@
 import React from 'react';
-import './NewsHolder.css'
+import './NewsHolder.css';
 
 function NewsHolder(props){
-    console.log(props.newsUS)
     if(props.newsUS.length){
+        let data = props.newsUS.map((x, idx) =>
+            <tr key={idx}><td><a href={x.url}>{x.title}</a></td><td>{x.source.name}</td></tr>
+        ) 
         return(
             <div className='NewsHolder'>
-                <h1>{props.newsUS[0].title}</h1>
+                <div className="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table className="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>Title</th>
+                            <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     } else {
