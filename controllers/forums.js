@@ -6,13 +6,12 @@ module.exports = {
     show,
     // update,
     delete: deleteOne,
-    indexAll
+    // indexAll
 };
 
-// index
 async function index(req, res) {
     try{
-        const forums = await Forum.find({}).populate('user');
+        const forums = await Forum.find({});//.populate('user')
         res.status(200).json(forums);
     }
     catch(err){
@@ -20,9 +19,7 @@ async function index(req, res) {
     }
 }
 
-// create
 async function create(req, res) {
-    req.body.user = req.user._id;
     try{
         const forum = await Forum.create(req.body);
         console.log('new forum:', forum)
@@ -33,11 +30,20 @@ async function create(req, res) {
     }
 }
 
-// show
 async function show(req, res) {
     try{
-        const forum = await Forum.findById(req.params.id).populate('user');
+        const forum = await Forum.findById(req.params.id);
         res.status(200).json(forum);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+}
+
+async function deleteOne(req, res) {
+    try{
+        const deletedForum = await Forum.findByIdAndRemove(req.params.id);
+        res.status(200).json(deletedForum);
     }
     catch(err){
         res.status(500).json(err);
@@ -55,24 +61,14 @@ async function show(req, res) {
 //     }
 // }
 
-// delete
-async function deleteOne(req, res) {
-    try{
-        const deletedForum = await Forum.findByIdAndRemove(req.params.id);
-        res.status(200).json(deletedForum);
-    }
-    catch(err){
-        res.status(500).json(err);
-    }
-}
 
 // indexAll
-async function indexAll(req, res) {
-    try{
-        const forumsByUser = await Forum.find({});
-        res.status(200).json(forumsByUser);
-    }
-    catch(err){
-        res.status(500).json(err);
-    }
-}
+// async function indexAll(req, res) {
+//     try{
+//         const forumsByUser = await Forum.find({});
+//         res.status(200).json(forumsByUser);
+//     }
+//     catch(err){
+//         res.status(500).json(err);
+//     }
+// }

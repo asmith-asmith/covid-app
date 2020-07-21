@@ -16,6 +16,7 @@ var commentSchema = new Schema({
 
 var forumSchema = new Schema({
     title: String,
+    content: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

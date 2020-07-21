@@ -9,7 +9,7 @@ class ForumPage extends Component {
             <div className="Forum">
                 <div>
                     <h3>ALL FORUMS</h3>
-                    <div className="collection">
+                    <div className="collection-grid">
                         {this.props.forums.map(forum =>
                             <ForumCard
                                 key={forum._id}

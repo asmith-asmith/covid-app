@@ -6,7 +6,6 @@ class AddForumPage extends Component {
         formData: {
             title: '',
             content: '',
-            user: ''
         }
     };
     formRef = React.createRef();
@@ -44,7 +43,7 @@ class AddForumPage extends Component {
                     </div>
                     <div className="form-group">
                         <label>Content (required)</label>
-                        <input
+                        <textarea
                             className="form-control"
                             name="content"
                             value={this.state.formData.content}
@@ -52,7 +51,7 @@ class AddForumPage extends Component {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>User</label>
                         <input
                             className="form-control"
@@ -61,7 +60,7 @@ class AddForumPage extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                    </div>
+                    </div> */}
                     <button
                         type="submit"
                         className="btn"

@@ -3,16 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import * as newsService from '../../utils/newsService'
+import * as forumService from '../../utils/forumService'
+import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
 import NavBar from '../../components/NavBar/NavBar'
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import HomePage from '../HomePage/HomePage'
 import ForumPage from '../ForumPage/ForumPage'
 import AddForumPage from '../AddForumPage/AddForumPage'
-import * as forumService from '../../utils/forumService'
-
-
-import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
 import Aside from '../../components/Aside/Aside';
 import WikiPage from '../WikiPage/WikiPage';
 
@@ -26,21 +24,9 @@ class App extends Component {
     covidWorldData: [],
     USHistoric: [],
     newsUS: [],
-    forums: [
-      {
-          _id: 1,
-          title: "the end is near",
-          content: "blalvlalv ablas the way rhesa  lskjh",
-          user: 'Aaron',
-          comments: [
-              {
-                  content: "loser",
-                  user: "meeeee"
-              }
-          ],
-      }
-  ]
+    forums: []
   }
+  
   /*--- Handle Methods ---*/
   handleLogout = () => {
     userService.logout();
@@ -51,31 +37,32 @@ class App extends Component {
     this.setState({user: userService.getUser()});
   }
 
-  handleAddForum = newForumData => {
-    newForumData._id = this.state.forums.length + 1
+  handleAddForum = async newForumData => {
+    const newForum = await forumService.create(newForumData);
     this.setState({
-      forums: [...this.state.forums, newForumData]
+      forums: [...this.state.forums, newForum]
     }, () => {
       this.props.history.push('/forums')
-      console.log(this.props.history)
     })
 }
 
   /*--- Lifecycle Methods ---*/
-  getAllForums = async () => {
-    const forums = await forumService.getAll();
-    this.setState({
-      forums
-    }, () => this.state.props.history.push('/forums'));
-}
+
+//   getAllForums = async () => {
+//     const forums = await forumService.getAll();
+//     console.log(forums)
+//     this.setState({
+//       forums
+//     }, () => this.state.props.history.push('/forums'));
+// }
 
   async componentDidMount() {
     const covidWorldData = await getTodayWorld();
     const covidUSData = await getCurrentState();
     const USHistoric = await getUnitedStatesHistorical()
     const newsUS = await newsService.getAll();
-    console.log(newsUS)
-    this.setState({covidWorldData, covidUSData, USHistoric, newsUS: newsUS.articles})
+    const forums = await forumService.getAll();
+    this.setState({covidWorldData, covidUSData, USHistoric, newsUS: newsUS.articles, forums: forums})
   }
 
   /*--- Render Method ---*/
@@ -118,7 +105,10 @@ class App extends Component {
               </>
             }/>
             <Route exact path='/forums/add' render={() =>
-                <AddForumPage handleAddForum={this.handleAddForum}/>
+                <AddForumPage
+                  handleAddForum={this.handleAddForum}
+                  user={this.state.user}
+                />
             } />
             <Route exact path='/wiki' render={() =>
                 <>

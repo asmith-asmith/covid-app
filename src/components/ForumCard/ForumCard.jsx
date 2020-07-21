@@ -3,11 +3,15 @@ import './ForumCard.css'
 
 function ForumCard(props){
     return(
-        <div className='ForumCard'>
-            <div className="collection-item blue-grey-text text-darken-2">
-                <div className="card-body">
-                    {props.forum.title}
-                </div>
+        <div className='panel panel-default'>
+            <div className="panel-heading">
+                {props.forum.title}
+            </div>
+            <div className="panel-body">
+                {props.forum.content}
+            </div>
+            <div class="panel-footer">
+                {props.forum.user}
             </div>
         </div>
     )
