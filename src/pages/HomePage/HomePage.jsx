@@ -11,8 +11,11 @@ const HomePage = (props) => {
     return (
       <div className="HomePage">
         <div className="mainContainer">
+          <h3>Dashboard</h3>
+          <hr/>
           <div className="statsContainer">
             <div className="stuffContainer">
+              
               <div className='chartData'>
                 { props.USHistoric && <ChartPart 
                   USHistoric={props.USHistoric}

@@ -8,9 +8,13 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import HomePage from '../HomePage/HomePage'
 import ForumPage from '../ForumPage/ForumPage'
+import AddForumPage from '../AddForumPage/AddForumPage'
+import * as forumService from '../../utils/forumService'
+
 
 import {  getTodayWorld,  getCurrentState, getUnitedStatesHistorical } from '../../services/covid-api';
 import Aside from '../../components/Aside/Aside';
+import WikiPage from '../WikiPage/WikiPage';
 
 
 
@@ -21,7 +25,21 @@ class App extends Component {
     covidUSData: [],
     covidWorldData: [],
     USHistoric: [],
-    newsUS: []
+    newsUS: [],
+    forums: [
+      {
+          _id: 1,
+          title: "the end is near",
+          content: "blalvlalv ablas the way rhesa  lskjh",
+          user: 'Aaron',
+          comments: [
+              {
+                  content: "loser",
+                  user: "meeeee"
+              }
+          ],
+      }
+  ]
   }
   /*--- Handle Methods ---*/
   handleLogout = () => {
@@ -32,7 +50,24 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
+
+  handleAddForum = newForumData => {
+    newForumData._id = this.state.forums.length + 1
+    this.setState({
+      forums: [...this.state.forums, newForumData]
+    }, () => {
+      this.props.history.push('/forums')
+      console.log(this.props.history)
+    })
+}
+
   /*--- Lifecycle Methods ---*/
+  getAllForums = async () => {
+    const forums = await forumService.getAll();
+    this.setState({
+      forums
+    }, () => this.state.props.history.push('/forums'));
+}
 
   async componentDidMount() {
     const covidWorldData = await getTodayWorld();
@@ -77,10 +112,20 @@ class App extends Component {
               <>
                 <Aside/>
                 <ForumPage
-
+                  history={history}
+                  forums={this.state.forums}
                 />
               </>
             }/>
+            <Route exact path='/forums/add' render={() =>
+                <AddForumPage handleAddForum={this.handleAddForum}/>
+            } />
+            <Route exact path='/wiki' render={() =>
+                <>
+                  <Aside/> 
+                  <WikiPage />
+                </>
+            } />
           </Switch>
           {/* <Route exact path='/builtby' render={({ history }) => 
               <>
