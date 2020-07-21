@@ -11,7 +11,7 @@ function ForumCard(props){
                 {props.forum.content}
             </div>
             <div class="panel-footer">
-                {props.forum.user}
+                {props.forum.user.name}
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ function ChartPart(props){
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: 'Monthly Trend',
+                    label: 'Weekly Trend',
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',

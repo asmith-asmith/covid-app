@@ -13,6 +13,8 @@ import ForumPage from '../ForumPage/ForumPage'
 import AddForumPage from '../AddForumPage/AddForumPage'
 import Aside from '../../components/Aside/Aside';
 import WikiPage from '../WikiPage/WikiPage';
+import HistoryPage from '../HistoryPage/HistoryPage';
+
 
 
 
@@ -76,6 +78,17 @@ class App extends Component {
               <>
                 <Aside/>
                 <HomePage
+                  covidWorldData={this.state.covidWorldData}
+                  covidUSData={this.state.covidUSData}
+                  USHistoric={this.state.USHistoric}
+                  newsUS={this.state.newsUS}
+                />
+              </>
+            }/>
+            <Route exact path='/status' render={() =>
+              <>
+                <Aside/>
+                <HistoryPage
                   covidWorldData={this.state.covidWorldData}
                   covidUSData={this.state.covidUSData}
                   USHistoric={this.state.USHistoric}

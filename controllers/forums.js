@@ -11,7 +11,7 @@ module.exports = {
 
 async function index(req, res) {
     try{
-        const forums = await Forum.find({});//.populate('user')
+        const forums = await Forum.find({}).populate('user');
         res.status(200).json(forums);
     }
     catch(err){
