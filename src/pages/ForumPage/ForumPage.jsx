@@ -14,6 +14,7 @@ class ForumPage extends Component {
                             <ForumCard
                                 key={forum._id}
                                 forum={forum}
+                                handleDeleteForum={this.props.handleDeleteForum}
                             />
                         )}
                     </div>

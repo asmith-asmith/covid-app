@@ -13,6 +13,12 @@ function ForumCard(props){
             <div className="panel-footer">
                 User: {props.forum.user.name}
             </div>
+            <button
+                className='btn btn-xs btn-danger margin-left-10'
+                onClick={() => props.handleDeleteForum(props.forum._id)}
+            >
+                DELETE
+            </button>
         </div>
     )
 }

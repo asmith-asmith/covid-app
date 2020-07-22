@@ -48,6 +48,13 @@ class App extends Component {
     })
   }
 
+  handleDeleteForum = async id => {
+    await forumService.deleteOne(id);
+    this.setState(state => ({
+      forums: state.forums.filter(p => p._id !== id)
+    }), () => this.props.history.push('/forums'));
+  }
+
   /*--- Lifecycle Methods ---*/
 
 //   getAllForums = async () => {
@@ -114,6 +121,7 @@ class App extends Component {
                 <ForumPage
                   history={history}
                   forums={this.state.forums}
+                  handleDeleteForum={this.handleDeleteForum}
                 />
               </>
             }/>
