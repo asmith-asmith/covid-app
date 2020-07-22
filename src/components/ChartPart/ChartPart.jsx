@@ -3,14 +3,14 @@ import {Line} from 'react-chartjs-2';
 import './ChartPart.css'
 
 function ChartPart(props){
-
-    let setData = props.USHistoric.filter( elem => /(2020)-([0-9][0-9])-(01)/.test(elem.date))
+    let setData = props.chartData
+    let setTags = props.chartTags
     if(setData.length){
         const data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: [setTags[6], setTags[5], setTags[4], setTags[3], setTags[2], setTags[1], setTags[0]],
             datasets: [
                 {
-                    label: 'Weekly Trend',
+                    label: props.title,
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',
@@ -28,7 +28,7 @@ function ChartPart(props){
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: [0, setData[1].cases, setData[2].cases, setData[3].cases, setData[4].cases, setData[5].cases, setData[5].cases]
+                    data: [setData[6], setData[5], setData[4], setData[3], setData[2], setData[1], setData[0]]
                 }
             ]
         };  

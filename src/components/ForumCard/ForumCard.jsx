@@ -5,13 +5,13 @@ function ForumCard(props){
     return(
         <div className='panel panel-default'>
             <div className="panel-heading">
-                {props.forum.title}
+                Title: {props.forum.title}
             </div>
             <div className="panel-body">
                 {props.forum.content}
             </div>
-            <div class="panel-footer">
-                {props.forum.user.name}
+            <div className="panel-footer">
+                User: {props.forum.user.name}
             </div>
         </div>
     )

@@ -46,7 +46,7 @@ class App extends Component {
     }, () => {
       this.props.history.push('/forums')
     })
-}
+  }
 
   /*--- Lifecycle Methods ---*/
 
