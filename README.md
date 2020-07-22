@@ -5,7 +5,7 @@ This is a COVID-19 tracking app where visitors can view current COVID-19 data, n
 [Link to App](https://covid-resources.herokuapp.com/)
 
 ## ScreenShots
-<!-- ![CVD](./public/images/1.png) -->
+![CVD](./public/images/1.png)
 
 ---
 
