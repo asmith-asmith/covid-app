@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import * as newsService from '../../utils/newsService'
@@ -126,10 +126,12 @@ class App extends Component {
               </>
             }/>
             <Route exact path='/forums/add' render={() =>
+                userService.getUser() ?
                 <AddForumPage
                   handleAddForum={this.handleAddForum}
                   user={this.state.user}
-                />
+                /> :
+                <Redirect to='/login'/>
             } />
             <Route exact path='/wiki' render={() =>
                 <>
